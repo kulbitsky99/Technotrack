@@ -1,0 +1,15 @@
+Constructor created successfully vector of capacity = 5
+The beginning of data is = 0x55a7f72c30b0
+Constructor created successfully vector of capacity = 5
+The beginning of data is = 0x55a7f72c3510
+Constructor created successfully vector of capacity = 5
+The beginning of data is = 0x55a7f72c3970
+Delete called in 43 line
+Destructor deleted vector with data pointer = 0x55a7f72c30b0
+Constructor copied vector in brackets into proper one successfully
+Delete called in 43 line
+Destructor deleted vector with data pointer = 0x55a7f72c39c0
+Delete called in 43 line
+Destructor deleted vector with data pointer = 0x55a7f72c3510
+Delete called in 43 line
+Destructor deleted vector with data pointer = 0x55a7f72c3970

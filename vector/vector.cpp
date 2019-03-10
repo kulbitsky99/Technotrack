@@ -1,72 +1,65 @@
-#include <iostream>
-#include <fstream>
-#include <cstdio>
-#include <cstdlib>
-#include <assert.h>
+#include "vector.h"
 
-#define mytype float
-
-class Vector
-{
-	private:
-		mytype * data_;
-		int capacity_;
-	public:
-		Vector();
-		Vector(int cap);
-		Vector(const Vector & v);
-		~Vector();
-		mytype & at(int index);
-		mytype &operator[] (int index);
-		Vector operator+(const Vector & other) const;
-		Vector& operator =(Vector rhs);
-//		void* operator new(size_t size, const char * file, int line);
-		void swap(Vector & rhs);
-		//________________________________________________//
-		friend  std::ostream & operator<<(std::ostream& stream, const Vector& v);
-		friend  std::istream & operator>>(std::istream& stream, Vector& v);
-};
+std::fstream fout("info.txt", std::ios_base::out);
 
 Vector :: Vector() :
 	data_  		(nullptr),
 	capacity_ 	      (0)
 {
-	std::cout << "Default constructor created nullptr pointer:)" << std::endl;
+//	fout.open("info.txt", std::ios_base::out);
+	fout << "Default constructor created nullptr pointer:)" << std::endl;
+//	fout.close();
 }
 
-Vector :: Vector(int cap) :
-	data_         (new mytype[cap]),
-	capacity_                 (cap)
+Vector :: Vector(int capacity_) :
+	data_         (new mytype [sizeof(mytype) * capacity_, __LINE__]),
+	capacity_                  (capacity_)
 {
-	std::cout << "Constructor created vector of capacity = " << cap << std::endl;
-	std::cout << "The beginning of data is = "<< data_ << std::endl;
+	/*
+	for(int i(0); i < capacity_; i++)
+	{
+		data_[i] = 0.0f;
+	}
+	*/
+//	fout.open("info.txt", std::ios_base::out);
+	fout << "Constructor created successfully vector of capacity = " << capacity_<< std::endl;
+	fout << "The beginning of data is = "<< data_ << std::endl;
+//	fout.close();
 }
 
 Vector :: Vector(const Vector & v) :
-	data_         (new mytype [v.capacity_]),
-	capacity_                 (v.capacity_)
+	data_         (new mytype [sizeof(mytype) * v.capacity_, __LINE__]),
+	capacity_                  (v.capacity_)
 {
 	for(int i = 0; i < v.capacity_; i++)
 		data_[i] = v.data_[i];
-	std::cout << "Constructor copied vector in brackets into proper one" << std::endl;
+//	fout.open("info.txt", std::ios_base::out);
+	fout << "Constructor copied vector in brackets into proper one successfully" << std::endl;
+//	fout.close();
 }
 
 Vector :: ~Vector()
 {
-	delete [] data_;
-	std::cout << "Destructor deleted vector with data pointer = " << data_ << std::endl;
+	operator delete[]( data_, __LINE__);//calling of function?
+	// delete[] data_;
+//	fout.open("info.txt", std::ios_base::out);
+	fout << "Destructor deleted vector with data pointer = " << data_ << std::endl;
 	data_ = nullptr;// not to call dtor again at the end of the function
+//	fout.close();
 }
+
 //_______________________________________________//
 mytype & Vector :: at(int index)
 {
 	assert(index >= 0 && index <= capacity_);
 	return data_[index];
 }
+
 mytype & Vector :: operator[] (int index)
 {
 	return at(index);
 }
+
 Vector Vector::operator+(const Vector & other) const
 {
 	assert(capacity_ == other.capacity_);
@@ -74,17 +67,31 @@ Vector Vector::operator+(const Vector & other) const
 	for(int i = 0; i < capacity_; i++)
 		result.data_[i] = this -> data_[i] + other.data_[i];
 	return result;
-}	
+}
+
 Vector& Vector :: operator=(Vector rhs)
 {
 	Vector :: swap(rhs);
 	return *this;
 }
 
-/*void* Vector :: operator new(size_t size, const char * file, int line)
+void* Vector :: operator new[](size_t size, int line)
 {
-	return new char [size];
-}*/
+	fout << "I was here" << std::endl;
+//	fout.open("info.txt", std::ios_base::out);
+        fout << "New called in " << line << " line with size = " << size << std::endl;
+//	fout.close();
+        return new char [size]();
+}
+
+void Vector :: operator delete[] (void* ptr, int line)
+{
+//	fout.open("info.txt", std::ios_base::out);
+        fout << "Delete called in " << line << " line" << std::endl;
+//	fout.close();
+        delete static_cast<mytype*>(ptr);
+}
+
 
 void Vector :: swap(Vector & rhs)
 {
@@ -112,18 +119,11 @@ std::istream & operator>>(std::istream & stream, Vector & v)
 	return stream;
 }
 
-int main()
+/*void operator delete[](void* ptr, int line)
 {
-	Vector v(5);
-	std::cout << v << std::endl;
-	Vector other(5);
-	std::cin >> other;
-	v = v + other;
-	std::cout << v << std::endl;
-	Vector v_copy(v);
-	std::cout << v_copy << std::endl;
-	return 0;
-}	
+	delete (mytype*)ptr;
+}*/
+
 
 
 
