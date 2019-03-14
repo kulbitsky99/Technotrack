@@ -1,0 +1,10 @@
+1. I studied difference between "mytype& operator[] (int n)" and "const mytype& operator[](int n) const". Const mytype& helps vector, that will be used in the future by other functions, not to change its value, using operator[]. Also compiler asks to mark function with 'const' in the end, cause it won't change values of our object. My teacher said to use 2 operators[], and compiler will help us, whether we can change object or not (if we give "const object&" to a function, we do not want any unpredictable changes of object due to operator[] without const marks). I've done the secong function "at" with const marks, cause compiler had a claim to it. This task is in ex1.cpp.
+
+2.const_cast makes it possible to form a reference or pointer to non-const type that is actually referring to a const object.
+
+3. Then I researched explicit. Code in ex2.cpp is not compiled, besause explicit forbids implicit conversions and implicit call of constructor. But without explicit code works and strings "Vector v(10);" and "Vector v = 10" are equivalents. Also without explicit we can give int value to a function, which is waiting for 'const vector&', and this conversion will work as a constructor.
+Implicit is often not a good option!
+
+4.I'he studied NRVO optimisation, when compiler(from C++ 11) is in the mode of copy elision. I completed the operation on 2 vectors: "c = a + b;" without extra copy constructor, when we need to copy result of a + b to c. Still, I have some questions: why result pointer != c pointer in my "ex2.cpp" and why do we still have the fourth copy constructor?
+
+5.Tried to deal with move semantics in ex4.cpp. I redefined operator= and copy constructor for temporary object and eliminated deep copy in "Vector & operator= (const Vector && rhs)".
