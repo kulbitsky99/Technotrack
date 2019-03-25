@@ -15,28 +15,30 @@ class Vector
                 Vector();
                 Vector(int capacity_);
                	Vector(const Vector & v);
+		Vector(Vector && that);
                 ~Vector();
                 mytype & at(int index);
 		const mytype & at(int index) const;
 		mytype &operator[] (int index);
                 const mytype &operator[] (int index) const;
-               // Vector operator+(const Vector & other) const;
+//		Vector operator+(const Vector & other) const;
 		Vector& operator+=(const Vector & other);
-                Vector operator=(Vector rhs);
+                Vector operator=(Vector && rhs);
                 void swap(Vector & rhs);
                 //________________________________________________//
                 friend  std::ostream & operator<<(std::ostream& stream, const Vector& v);
                 friend  std::istream & operator>>(std::istream& stream, Vector& v);
 };
 
-/*void f(const Vector& v)
+const Vector & f(const Vector& v)
 {
-	for(int i = 0; i < v.capacity_; i++)
+	return v;
+	/*for(int i = 0; i < v.capacity_; i++)
 	{
 		std::cout << v.data_[i] << " ";
 		std::cout << std::endl;
-	}
-}*/
+	}*/
+}
 
 Vector operator+(const Vector& a, const Vector& b)
 {
@@ -50,10 +52,10 @@ Vector operator+(const Vector& a, const Vector& b)
 
 int main()
 {
-	Vector a(5), b(5), c;
+	Vector a(5), b(5);
 	std::cin >> a;
 	std::cin >> b;
-	c = a + b;
+	Vector c(a);
 	std::cout << "c pointer = " << &c << std::endl;
 	std::cout << c;
 //	std::cout << "v[3] = " << v[3] << std::endl;
@@ -64,12 +66,13 @@ Vector :: Vector() :
         data_           (nullptr),
         capacity_             (0)
 {
-	std::cout << "Default constructor created nullptr pointer:)" << std::endl;
+	std::cout << "Default constructor created nullptr pointer" << std::endl;
 }
 
 Vector :: Vector(int capacity) :
         data_                 (new mytype [capacity * sizeof(mytype)]),
         capacity_                                           (capacity)
+
 {
 	std::cout << "Constructor created successfully vector of capacity = " << capacity_<< std::endl;
 	std::cout << "The beginning of data is = "<< data_ << std::endl;
@@ -81,7 +84,17 @@ Vector :: Vector(const Vector & v) :
 {
         for(int i = 0; i < v.capacity_; i++)
                 data_[i] = v.data_[i];
+	std::cout << std::endl;
 	std::cout << "Constructor copied vector in brackets into proper one successfully" << std::endl;
+	std::cout << "Vector in brackets pointer = " << &v << std::endl;
+	std::cout << "Proper one's pointer = " << this << std::endl;
+	std::cout << std::endl;
+}
+Vector :: Vector(Vector && that)
+{
+	std::cout << "I was in move constructor &&" << std::endl;
+	std::move(that);
+	that.data_ = nullptr;
 }
 Vector :: ~Vector()
 {
@@ -139,9 +152,10 @@ const mytype & Vector :: operator[] (int index) const
         return result;
 }*/
 
-Vector Vector :: operator=(Vector rhs)
+Vector Vector :: operator=(Vector && rhs)
 {
-        Vector :: swap(rhs);
+	//std::cout << "I was here &&" << std::endl;
+	Vector::swap(rhs);
         return *this;
 }
 void Vector :: swap(Vector & rhs)
@@ -157,7 +171,7 @@ std::ostream & operator<<(std::ostream & stream, const Vector & v)
         {
                 std::cout << v.data_[i] << " ";
         }
-        std::cout << ")";
+        std::cout << ")" << std::endl;
         return stream;
 }
 
