@@ -30,7 +30,7 @@ class Vector
                 friend  std::istream & operator>>(std::istream& stream, Vector& v);
 };
 
-const Vector & f(const Vector& v)
+Vector & f(Vector& v)
 {
 	return v;
 	/*for(int i = 0; i < v.capacity_; i++)
@@ -52,10 +52,10 @@ Vector operator+(const Vector& a, const Vector& b)
 
 int main()
 {
-	Vector a(5), b(5);
+	Vector a(1), b(1);
 	std::cin >> a;
 	std::cin >> b;
-	Vector c(a);
+	Vector c = (std::move(Vector(1)));
 	std::cout << "c pointer = " << &c << std::endl;
 	std::cout << c;
 //	std::cout << "v[3] = " << v[3] << std::endl;
@@ -93,7 +93,7 @@ Vector :: Vector(const Vector & v) :
 Vector :: Vector(Vector && that)
 {
 	std::cout << "I was in move constructor &&" << std::endl;
-	std::move(that);
+	Vector::swap(that);
 	that.data_ = nullptr;
 }
 Vector :: ~Vector()
