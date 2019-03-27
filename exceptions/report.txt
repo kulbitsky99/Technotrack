@@ -1,0 +1,6 @@
+ATTENTION! EXCEPTION HAPPENED!
+type of mistake - 1
+short message about it: FIRST EXCEPTION
+line of throwing 8
+file, where throwing happened except.cpp
+function, where throwing happened main
