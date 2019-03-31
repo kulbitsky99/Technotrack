@@ -1,1 +1,1 @@
-#Technotrack MIPT tasks(course of Ilya Dedinskij)
+# Technotrack MIPT tasks(course of Ilya Dedinskij)
