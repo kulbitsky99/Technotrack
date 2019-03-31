@@ -1,6 +1,35 @@
-ATTENTION! EXCEPTION HAPPENED!
-type of mistake - 1
-short message about it: FIRST EXCEPTION
-line of throwing 8
-file, where throwing happened except.cpp
-function, where throwing happened main
+___Here is all the information about catched exception!___
+
+Exception of 1 type happened.
+DO YOU REALLY THINK THAT SOMEONE IS BETTER THAN MENTOR VADIM SOKOLOV??? If a had an opportunity, I would call all destructors to eliminate such a silly program. GOD DAMN BOY!!!
+Exception threw from the {except.cpp} file, {deeper} function and 59 line.
+
+________________________________________________________
+___Here is all the information about catched exception!___
+
+Exception of 1 type happened.
+DO YOU REALLY THINK THAT SOMEONE IS BETTER THAN MENTOR VADIM SOKOLOV??? If a had an opportunity, I would call all destructors to eliminate such a silly program. GOD DAMN BOY!!!
+Exception threw from the {except.cpp} file, {deeper} function and 59 line.
+
+________________________________________________________
+___Here is all the information about catched exception!___
+
+Exception of 1 type happened.
+DO YOU REALLY THINK THAT SOMEONE IS BETTER THAN MENTOR VADIM SOKOLOV??? If a had an opportunity, I would call all destructors to eliminate such a silly program. GOD DAMN BOY!!!
+Exception threw from the {except.cpp} file, {deeper} function and 58 line.
+
+________________________________________________________
+Exception of undefined type catched!
+
+________________________________________________________
+Exception of undefined type catched!
+
+________________________________________________________
+________________________________________________________
+___Here is all the information about catched exception!___
+
+Exception of 2 type happened.
+Invalid identification of type happened.
+Exception threw from the {except.cpp} file, {deeper_and_deeper} function and 45 line.
+
+________________________________________________________
