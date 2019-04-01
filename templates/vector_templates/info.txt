@@ -1,0 +1,4 @@
+Constructor created successfully vector of capacity = 5
+The beginning of data is = 0x558abcca50b0
+Delete called in 35 line
+Destructor deleted vector with data pointer = 0x558abcca50b0
